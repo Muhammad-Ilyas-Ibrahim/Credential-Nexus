@@ -200,28 +200,80 @@ def search_passwords():
     except Exception as e:
         print(f"Error during search: {str(e)}")
 
+def print_banner():
+    banner = """
+╔═══════════════════════════════════════╗
+║        Credential Nexus v1.0          ║
+║     Password Management System        ║
+╚═══════════════════════════════════════╝
+"""
+    print(banner)
+
+def show_statistics():
+    try:
+        storage_db = sqlite3.connect("stored_passwords.db")
+        cursor = storage_db.cursor()
+        
+        # Get total count
+        cursor.execute("SELECT COUNT(*) from saved_passwords")
+        total = cursor.fetchone()[0]
+        
+        # Get count by source
+        cursor.execute("SELECT source, COUNT(*) from saved_passwords GROUP BY source")
+        sources = cursor.fetchall()
+        
+        # Get latest extraction date
+        cursor.execute("SELECT MAX(date_added) from saved_passwords")
+        last_update = cursor.fetchone()[0]
+        
+        print("\n====================================")
+        print("    Password Database Statistics    ")
+        print("====================================")
+        print(f"\nTotal stored passwords: {total}")
+        print("\nBreakdown by source:")
+        for source, count in sources:
+            print(f"- {source}: {count}")
+        if last_update:
+            print(f"\nLast updated: {last_update}")
+            
+        cursor.close()
+        storage_db.close()
+    except Exception as e:
+        print(f"Error getting statistics: {str(e)}")
+
 def main_menu():
     while True:
         os.system("cls")
-        os.system("title Password Manager")
-        os.system("color a")
-        print("\n=== Password Manager Menu ===")
-        print("1. Extract Chrome Passwords")
-        print("2. Search Saved Passwords")
-        print("3. Exit")
+        os.system("title Credential Nexus")
+        os.system("color 0A")
         
-        choice = input("\n>> ").strip()
+        print_banner()
+        print("\nPlease select an option:")
+        print("╔════════════════════════════════╗")
+        print("║  1. Extract Chrome Passwords   ║")
+        print("║  2. Search Saved Passwords     ║")
+        print("║  3. View Database Statistics   ║")
+        print("║  4. Exit                       ║")
+        print("╚════════════════════════════════╝")
+        
+        choice = input("\nEnter your choice (1-4): ").strip()
         
         os.system("cls")
+        print_banner()
+        
         if choice == "1":
             extract_passwords()
         elif choice == "2":
             search_passwords()
         elif choice == "3":
-            print("Goodbye!")
+            show_statistics()
+        elif choice == "4":
+            print("\nThank you for using Credential Nexus!")
             break
         else:
             print("Invalid choice. Please try again.")
-        input("\nPress Enter to continue...")
+        
+        input("\nPress Enter to return to main menu...")
+
 if __name__ == "__main__":
     main_menu()

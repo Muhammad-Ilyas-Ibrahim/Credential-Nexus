@@ -64,7 +64,8 @@ Credential Nexus operates through the following key steps:
     *   Choose options using the number keys:
         *   `1`: Extract Chrome Passwords
         *   `2`: Search Saved Passwords
-        *   `3`: Exit
+        *   `3`: View Database Statistics
+        *   `4`: Exit
 2.  **Password Extraction**
     *   Select option `1` to begin extracting and decrypting passwords.
     *   The tool will display a summary of successfully added passwords and decryption failures.
@@ -75,6 +76,11 @@ Credential Nexus operates through the following key steps:
         *   `2`: Search by source (Chrome/Discord/Firefox)
         *   `3`: Show all entries
     *   Enter the search term if prompted and view the results.
+4.  **Database Statistics**
+    *   Select option `3` to view database statistics
+    *   Displays total number of stored passwords
+    *   Shows breakdown of passwords by source
+    *   Indicates the last update timestamp
 
 ### 🧩 Code Structure
 
