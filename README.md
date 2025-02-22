@@ -96,3 +96,7 @@ Credential Nexus/
 
 ### 🤝 Contributing
 Contributions to Credential Nexus are welcome! Please fork the repository, create a feature branch, and submit a pull request with detailed changes.
+
+### 📄 License
+
+Credential Nexus is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
